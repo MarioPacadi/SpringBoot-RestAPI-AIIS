@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DogClientApplication extends Application {
 
@@ -53,8 +55,10 @@ public class DogClientApplication extends Application {
         breedNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBreedName()));
         TableColumn<DogBreed, String> breedTypeColumn = new TableColumn<>("Breed Type");
         breedTypeColumn.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getBreedType()));
+        TableColumn<DogBreed, String> breedDescriptionColumn = new TableColumn<>("Breed Description");
+        breedDescriptionColumn.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getBreedType()));
 
-        dogTable.getColumns().addAll(breedNameColumn, breedTypeColumn);
+        dogTable.getColumns().addAll(breedNameColumn, breedTypeColumn,breedDescriptionColumn);
 
         // Set table selection listener
         dogTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -91,8 +95,11 @@ public class DogClientApplication extends Application {
         );
 
         // Set the scene
+        Image icon=new Image(Objects.requireNonNull(getClass().getResourceAsStream("/hr/algebra/dogsfx/images/WatchDog.png")));
+
         primaryStage.setScene(new Scene(root));
         primaryStage.setTitle("Dog Client");
+        primaryStage.getIcons().add(icon);
         primaryStage.show();
     }
 

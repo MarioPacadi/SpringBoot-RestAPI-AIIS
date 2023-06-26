@@ -1,0 +1,22 @@
+{
+  "GET": [
+    {
+      "id": 4,
+      "breedName": "Golden Retriever",
+      "breedType": "Retrievers",
+      "breedDescription": "The Golden Retriever is a large-sized breed of retriever dog known for its friendly and intelligent nature. It originated in Scotland and is often used as a hunting and service dog."
+    },
+    {
+      "id": 2,
+      "breedName": "Labrador Retriever",
+      "breedType": "Retrievers",
+      "breedDescription": "The Labrador Retriever is a medium to large-sized breed of retriever dog that originated in Canada."
+    },
+    {
+      "id": 1,
+      "breedName": "Afador",
+      "breedType": "Mixed Breed Dogs",
+      "breedDescription": "The Afador is a hybrid dog composed of an Afghan Hound and a Labrador Retriever that originated in Alaska around the year 2000."
+    }
+  ]
+}

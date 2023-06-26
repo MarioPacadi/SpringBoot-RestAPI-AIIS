@@ -10,7 +10,8 @@ import org.springframework.jms.core.JmsTemplate;
 @EnableJms
 @Configuration
 public class ActiveMQConfig {
-    String BROKER_URL = "tcp://localhost:32774";
+    //String BROKER_URL = "tcp://localhost:32774";
+    String BROKER_URL = "tcp://localhost:32768";
     String BROKER_USERNAME = "admin";
     String BROKER_PASSWORD = "admin";
     @Bean

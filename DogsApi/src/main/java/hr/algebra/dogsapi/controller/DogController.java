@@ -44,7 +44,7 @@ public class DogController {
     @PostMapping
     public DogDTO save(@Valid @RequestBody final DogCommand command){
 //        jmsTemplate.convertAndSend(
-//                "Saving the the Dog to the database: " +command.getBreedName());
+//                "Saving the Dog "+ command.getBreedName() + " to the database.");
         return dogService.save(command)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.CONFLICT, "Dog with the same breedName already exists"));
     }
