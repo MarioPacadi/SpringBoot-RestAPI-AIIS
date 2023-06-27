@@ -1,4 +1,4 @@
-package hr.algebra.dogsapi.security.dto;
+package hr.algebra.dogsapi.dto;
 
 public class LoginDTO {
     private final String jwt;

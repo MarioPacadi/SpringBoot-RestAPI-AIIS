@@ -1,6 +1,6 @@
 package hr.algebra.dogsapi.dto;
 
-import hr.algebra.dogsapi.domain.DogBreed;
+import hr.algebra.dogsapi.models.DogBreed;
 
 public class DogDTO {
 

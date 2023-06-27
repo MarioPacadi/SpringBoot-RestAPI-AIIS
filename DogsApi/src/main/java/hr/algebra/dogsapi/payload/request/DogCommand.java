@@ -1,4 +1,4 @@
-package hr.algebra.dogsapi.command;
+package hr.algebra.dogsapi.payload.request;
 
 import javax.validation.constraints.*;
 

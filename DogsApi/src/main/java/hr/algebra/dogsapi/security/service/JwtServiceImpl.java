@@ -1,7 +1,7 @@
 package hr.algebra.dogsapi.security.service;
 
-import hr.algebra.dogsapi.security.domain.Authority;
-import hr.algebra.dogsapi.security.domain.Account;
+import hr.algebra.dogsapi.models.Authority;
+import hr.algebra.dogsapi.models.Account;
 import hr.algebra.dogsapi.security.user.ApplicationUser;
 import hr.algebra.dogsapi.security.user.UserAuthentication;
 import io.jsonwebtoken.*;

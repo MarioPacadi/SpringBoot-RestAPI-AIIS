@@ -1,6 +1,6 @@
 package hr.algebra.dogsapi.jobs;
 
-import hr.algebra.dogsapi.domain.DogBreed;
+import hr.algebra.dogsapi.models.DogBreed;
 import hr.algebra.dogsapi.repository.DogRepository;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;

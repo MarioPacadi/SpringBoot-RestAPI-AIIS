@@ -1,6 +1,6 @@
 package hr.algebra.dogsapi.security.service;
 
-import hr.algebra.dogsapi.security.domain.Account;
+import hr.algebra.dogsapi.models.Account;
 
 public interface JwtService {
 

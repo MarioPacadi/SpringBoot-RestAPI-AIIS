@@ -1,4 +1,4 @@
-package hr.algebra.dogsapi.security.domain;
+package hr.algebra.dogsapi.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

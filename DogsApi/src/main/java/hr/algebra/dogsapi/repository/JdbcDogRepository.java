@@ -1,6 +1,6 @@
 package hr.algebra.dogsapi.repository;
 
-import hr.algebra.dogsapi.domain.DogBreed;
+import hr.algebra.dogsapi.models.DogBreed;
 import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;

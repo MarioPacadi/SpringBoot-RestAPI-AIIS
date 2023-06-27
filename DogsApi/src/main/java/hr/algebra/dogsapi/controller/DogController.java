@@ -1,8 +1,8 @@
 package hr.algebra.dogsapi.controller;
 
-import hr.algebra.dogsapi.command.DogUpdateCommand;
+import hr.algebra.dogsapi.payload.request.DogUpdateCommand;
 import hr.algebra.dogsapi.dto.DogDTO;
-import hr.algebra.dogsapi.command.DogCommand;
+import hr.algebra.dogsapi.payload.request.DogCommand;
 import hr.algebra.dogsapi.service.DogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.jms.core.JmsTemplate;
@@ -44,7 +44,7 @@ public class DogController {
     @PostMapping
     public DogDTO save(@Valid @RequestBody final DogCommand command){
 //        jmsTemplate.convertAndSend(
-//                "Saving the Dog "+ command.getBreedName() + " to the database.");
+//                "Saving the Dog "+ request.getBreedName() + " to the database.");
         return dogService.save(command)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.CONFLICT, "Dog with the same breedName already exists"));
     }

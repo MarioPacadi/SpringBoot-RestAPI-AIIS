@@ -1,7 +1,7 @@
-package hr.algebra.dogsapi.domain;
+package hr.algebra.dogsapi.models;
 
-import hr.algebra.dogsapi.command.DogCommand;
-import hr.algebra.dogsapi.command.DogUpdateCommand;
+import hr.algebra.dogsapi.payload.request.DogCommand;
+import hr.algebra.dogsapi.payload.request.DogUpdateCommand;
 
 import javax.persistence.*;
 import java.util.Objects;

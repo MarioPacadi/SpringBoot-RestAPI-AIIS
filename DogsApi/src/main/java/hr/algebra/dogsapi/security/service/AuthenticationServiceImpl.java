@@ -1,9 +1,9 @@
 package hr.algebra.dogsapi.security.service;
 
-import hr.algebra.dogsapi.security.command.LoginCommand;
-import hr.algebra.dogsapi.security.domain.Account;
-import hr.algebra.dogsapi.security.dto.LoginDTO;
-import hr.algebra.dogsapi.security.repository.UserRepository;
+import hr.algebra.dogsapi.payload.request.LoginCommand;
+import hr.algebra.dogsapi.models.Account;
+import hr.algebra.dogsapi.dto.LoginDTO;
+import hr.algebra.dogsapi.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

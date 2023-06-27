@@ -1,7 +1,7 @@
 package hr.algebra.dogsapi.security.service;
 
-import hr.algebra.dogsapi.security.dto.LoginDTO;
-import hr.algebra.dogsapi.security.command.LoginCommand;
+import hr.algebra.dogsapi.dto.LoginDTO;
+import hr.algebra.dogsapi.payload.request.LoginCommand;
 
 import java.util.Optional;
 

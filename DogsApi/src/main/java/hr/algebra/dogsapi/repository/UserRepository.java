@@ -1,6 +1,6 @@
-package hr.algebra.dogsapi.security.repository;
+package hr.algebra.dogsapi.repository;
 
-import hr.algebra.dogsapi.security.domain.Account;
+import hr.algebra.dogsapi.models.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

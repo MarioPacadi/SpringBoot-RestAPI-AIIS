@@ -1,7 +1,7 @@
-package hr.algebra.dogsapi.security.controller;
+package hr.algebra.dogsapi.controller;
 
-import hr.algebra.dogsapi.security.command.LoginCommand;
-import hr.algebra.dogsapi.security.dto.LoginDTO;
+import hr.algebra.dogsapi.payload.request.LoginCommand;
+import hr.algebra.dogsapi.dto.LoginDTO;
 import hr.algebra.dogsapi.security.service.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package hr.algebra.dogsapi.repository;
 
-import hr.algebra.dogsapi.domain.DogBreed;
+import hr.algebra.dogsapi.models.DogBreed;
 import org.springframework.stereotype.Repository;
 
 import java.util.Objects;
