@@ -27,11 +27,6 @@ public class RefreshTokenService {
     @Autowired
     private UserRepository userRepository;
 
-//    public RefreshTokenService(RefreshTokenRepository refreshTokenRepository, UserRepository userRepository) {
-//        this.refreshTokenRepository = refreshTokenRepository;
-//        this.userRepository = userRepository;
-//    }
-
     public Optional<RefreshToken> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);
     }
@@ -64,7 +59,5 @@ public class RefreshTokenService {
             return refreshTokenRepository.deleteByUser(account.get());
         }
         return 0;
-//        Optional<Account> user = userRepository.findById(userId);
-//        return user.map(refreshTokenRepository::deleteByUser).orElse(0);
     }
 }
