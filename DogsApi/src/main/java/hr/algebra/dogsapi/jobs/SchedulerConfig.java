@@ -19,7 +19,7 @@ public class SchedulerConfig {
     @Bean
     public SimpleTrigger DogPrintTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(5).repeatForever();
+                .withIntervalInSeconds(30).repeatForever();
 
         return TriggerBuilder.newTrigger().forJob(DogPrintJobDetail())
                 .withIdentity(Dog_PRINT_TRIGGER).withSchedule(scheduleBuilder).build();

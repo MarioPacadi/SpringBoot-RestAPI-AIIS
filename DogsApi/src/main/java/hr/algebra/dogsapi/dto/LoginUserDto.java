@@ -5,17 +5,19 @@ import com.sun.istack.NotNull;
 public class LoginUserDto {
 
     @NotNull
-    private String password;
+    public String username;
 
     @NotNull
-    public String username;
+    private String password;
+
+
 
     public LoginUserDto() {
     }
 
-    public LoginUserDto(String password, String username) {
-        this.password = password;
+    public LoginUserDto(String username, String password) {
         this.username = username;
+        this.password = password;
     }
 
     public String getPassword() {

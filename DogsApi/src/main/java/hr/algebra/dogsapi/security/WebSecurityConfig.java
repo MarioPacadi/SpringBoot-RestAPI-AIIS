@@ -68,12 +68,12 @@ public class WebSecurityConfig {
                 .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/csrf/v1").permitAll()
-//                .antMatchers("/package").permitAll()
+//                .antMatchers("/dog").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                .and().csrf().disable();
 
         http.authenticationProvider(authenticationProvider());
 

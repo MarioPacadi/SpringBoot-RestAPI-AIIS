@@ -18,18 +18,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("auth")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     AuthenticationManager authenticationManager;
@@ -68,7 +67,7 @@ public class AuthController {
         Account accountDetails = (Account) authentication.getPrincipal();
 
 
-        String jwt = jwtUtils.generateTokenFromUsername(accountDetails.getUsername(), Arrays.asList(Roles.get(accountDetails.getRoleId())));
+        String jwt = jwtUtils.generateTokenFromUsername(accountDetails.getUsername(), Collections.singletonList(Roles.get(accountDetails.getRoleId())));
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(accountDetails.getId());
 
         return ResponseEntity.ok().body(new TokensDto(jwt, refreshToken.getToken()));
