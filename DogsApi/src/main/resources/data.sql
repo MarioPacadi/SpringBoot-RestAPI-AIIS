@@ -1,7 +1,7 @@
 DELETE FROM dog_breed;
-DELETE FROM user_authority;
+DELETE FROM user_role;
 DELETE FROM account;
-DELETE FROM authority;
+DELETE FROM roles;
 
 INSERT INTO dog_breed (breedName, breedType, breedDescription, furColor, origin, minHeightInches, maxHeightInches, minWeightPounds, maxWeightPounds, minLifeSpan, maxLifeSpan, imgThumb, imgSourceURL, imgAttribution, imgCreativeCommons)
 VALUES ('Afador', 'Mixed Breed Dogs', 'The Afador is a hybrid dog composed of an Afghan Hound and a Labrador Retriever that originated in Alaska around the year 2000.', 'black, brown, gray, red, fawn', 'Alaska', 20, 29, 50, 75, 10, 12, 'https://s3.us-west-004.backblazeb2.com/encurate/static/dogbreed/dog-default.jpg', null, null, 0);
@@ -19,10 +19,10 @@ INSERT INTO account (username, password)
 VALUES ('account', '$2a$12$h0HcS2QDb/7zPASbLa2GoOTSRP6CWK0oX7pCK.dPjkM6L5N4pNovi'), -- password = account
        ('admin', '$2a$12$INo0nbj40sQrTB7b28KJput/bNltGmFyCfRsUhvy73qcXo5/XdsTG'); -- password = admin
 
-INSERT INTO authority (authority_name)
+INSERT INTO role (role_name)
 VALUES ('ROLE_ADMIN'),
        ('ROLE_USER');
 
-INSERT INTO user_authority (user_id, authority_id)
+INSERT INTO user_role (user_id, role_id)
 VALUES (2, 1),
        (1, 2);

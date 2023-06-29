@@ -1,6 +1,7 @@
 package hr.algebra.dogsapi;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
@@ -12,8 +13,10 @@ import org.springframework.jms.core.JmsTemplate;
 public class ActiveMQConfig {
     //String BROKER_URL = "tcp://localhost:32774";
     String BROKER_URL = "tcp://localhost:32768";
-    String BROKER_USERNAME = "admin";
-    String BROKER_PASSWORD = "admin";
+    @Value("${spring.activemq.user}")
+    String BROKER_USERNAME;
+    @Value("${spring.activemq.password}")
+    String BROKER_PASSWORD;
     @Bean
     public ActiveMQConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();

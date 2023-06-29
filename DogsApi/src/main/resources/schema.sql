@@ -26,24 +26,26 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'account')
         CREATE TABLE account (
              id INT IDENTITY PRIMARY KEY,
              username VARCHAR(100) NOT NULL UNIQUE,
-             password VARCHAR(1000) NOT NULL
+             password VARCHAR(1000) NOT NULL,
+             email VARCHAR(1000) NULL,
+             roleId int not null,
         );
     END;
 
-IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'authority')
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'role')
     BEGIN
-        CREATE TABLE authority (
+        CREATE TABLE role (
            id INT IDENTITY PRIMARY KEY,
-           authority_name VARCHAR(100) NOT NULL UNIQUE
+           role_name VARCHAR(100) NOT NULL UNIQUE
         );
     END;
 
-IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'user_authority')
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'user_role')
     BEGIN
-        CREATE TABLE user_authority (
+        CREATE TABLE user_role (
             user_id INT NOT NULL,
-            authority_id INT NOT NULL,
+            role_id INT NOT NULL,
             CONSTRAINT fk_account FOREIGN KEY (user_id) REFERENCES account(id),
-            CONSTRAINT fk_authority FOREIGN KEY (authority_id) REFERENCES authority(id)
+            CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id)
         );
     END;

@@ -1,10 +1,11 @@
-package hr.algebra.dogsapi.service;
+package hr.algebra.dogsapi.service.impl;
 
 import hr.algebra.dogsapi.payload.request.DogCommand;
 import hr.algebra.dogsapi.payload.request.DogUpdateCommand;
 import hr.algebra.dogsapi.models.DogBreed;
 import hr.algebra.dogsapi.dto.DogDTO;
 import hr.algebra.dogsapi.repository.DogRepository;
+import hr.algebra.dogsapi.service.DogService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

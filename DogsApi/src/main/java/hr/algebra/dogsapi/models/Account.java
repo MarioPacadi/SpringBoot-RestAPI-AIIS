@@ -1,44 +1,50 @@
 package hr.algebra.dogsapi.models;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.BatchSize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.Collection;
 
 @Entity
-public class Account {
+public class Account implements UserDetails {
 
     @Id
+    @Column(name = "id_user")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String username;
 
     private String password;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "USER_AUTHORITY",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")}
-    )
-    @BatchSize(size = 20)
-    private Set<Authority> authorities = new HashSet<>();
+    private String email;
 
+    @Column(name = "role_id")
+    private int roleId;
 
     public Account() {
     }
 
-    public Account(Long id, String username, String password, Set<Authority> authorities) {
+    public Account(Long id, String username, String password, String email, int roleId) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.authorities = authorities;
+        this.email = email;
+        this.roleId = roleId;
+    }
+
+    public Account(String username, String email, String password) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public Account(Long id, String username, String email) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
     }
 
     public Long getId() {
@@ -53,7 +59,57 @@ public class Account {
         return password;
     }
 
-    public Set<Authority> getAuthorities() {
-        return authorities;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(Roles.valueOf(roleId));
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
 }
