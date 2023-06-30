@@ -40,13 +40,13 @@ public class DogController {
                 );
     }
 
-    @GetMapping
-    public DogDTO getByBreedName(@RequestParam final String breedName) {
-        return dogService.findByName(breedName)
-                .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog was not found by that breedName")
-                );
-    }
+//    @GetMapping("{id}")
+//    public DogDTO getByBreedName(@RequestParam final String breedName, @PathVariable String id) {
+//        return dogService.findByName(breedName)
+//                .orElseThrow(
+//                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog was not found by that breedName")
+//                );
+//    }
 
     //@Secured("ROLE_ADMIN")
     @ResponseStatus(HttpStatus.CREATED)

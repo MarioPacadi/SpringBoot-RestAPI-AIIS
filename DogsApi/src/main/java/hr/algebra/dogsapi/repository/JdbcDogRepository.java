@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 @Primary
 @Repository
@@ -42,6 +43,10 @@ public class JdbcDogRepository implements DogRepository {
 
     @Override
     public Optional<DogBreed> findByName(String dogName) {
+        if (!isSqlValid(dogName)) {
+            throw new IllegalArgumentException("Invalid SQL statement: " + dogName);
+        }
+
         try {
             return Optional.ofNullable(
                     jdbcTemplate.queryForObject(SELECT_ALL + " WHERE breed_name = ?", this::mapRowToDog, dogName)
@@ -63,6 +68,10 @@ public class JdbcDogRepository implements DogRepository {
 
     @Override
     public Optional<DogBreed> update(String dogName, DogBreed updatedDog) {
+        if (!isSqlValid(dogName)) {
+            throw new IllegalArgumentException("Invalid SQL statement: " + dogName);
+        }
+
         int executed = jdbcTemplate.update("UPDATE dog_breed SET " +
                         "breed_name = ?, " +
                         "breed_type = ?, " +
@@ -104,7 +113,17 @@ public class JdbcDogRepository implements DogRepository {
 
     @Override
     public void deleteByName(String dogName) {
-        jdbcTemplate.update("DELETE FROM dog_breed WHERE breed_name = ?", dogName);
+        String query = "DELETE FROM dog_breed";
+
+        if(Optional.ofNullable(dogName).isPresent()) {
+            query += " WHERE breed_name = " + dogName;
+        }
+
+        if (!isSqlValid(dogName)) {
+            throw new IllegalArgumentException("Invalid SQL statement: " + dogName);
+        }
+
+        jdbcTemplate.update(query);
     }
 
     private DogBreed mapRowToDog(ResultSet rs, int rowNum) throws SQLException {
@@ -151,5 +170,8 @@ public class JdbcDogRepository implements DogRepository {
         return simpleJdbcInsert.executeAndReturnKey(values).longValue();
     }
 
-
+    public boolean isSqlValid(String statement) {
+        String pattern = ".*\\b(DELETE|INSERT|UPDATE|DROP|ALTER)\\b.*";
+        return !Pattern.matches(pattern, statement);
+    }
 }
