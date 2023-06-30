@@ -1,0 +1,7 @@
+docker run --add-host=host.docker.internal:host-gateway -p 8080:8080 -p 8001:8001 -d --name jbpm-server-full jboss/jbpm-server-full:latest
+
+mvn clean package
+
+docker build -t dog_api:v1 .
+
+new org.jbpm.process.workitem.rest.RESTWorkItemHandler()

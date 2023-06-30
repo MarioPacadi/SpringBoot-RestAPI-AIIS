@@ -68,7 +68,7 @@ public class WebSecurityConfig {
                 .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/csrf/v1").permitAll()
-//                .antMatchers("/dog").permitAll()
+                .antMatchers("/dog/**").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()
