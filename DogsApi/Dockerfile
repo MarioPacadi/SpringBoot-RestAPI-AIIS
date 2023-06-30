@@ -1,5 +1,4 @@
 # Use an official OpenJDK runtime as the base image
-#FROM adoptopenjdk:11-jre-hotspot
 FROM openjdk:19
 
 # Set the working directory inside the container
@@ -12,4 +11,4 @@ COPY target/DogsApi-1.0.0-SNAPSHOT.jar app.jar
 EXPOSE 8081
 
 # Define the command to run your application
-CMD ["java", "-jar", "--add-host=host.docker.internal:host-gateway", "application.jar"]
+CMD ["java", "-jar", "app.jar"]
