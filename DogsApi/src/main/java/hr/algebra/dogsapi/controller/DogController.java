@@ -5,6 +5,7 @@ import hr.algebra.dogsapi.dto.DogDTO;
 import hr.algebra.dogsapi.payload.request.DogCommand;
 import hr.algebra.dogsapi.service.DogService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,6 +34,14 @@ public class DogController {
 
     @GetMapping("{breedName}")
     public DogDTO getByName(@PathVariable final String breedName) {
+        return dogService.findByName(breedName)
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog was not found by that breedName")
+                );
+    }
+
+    @GetMapping
+    public DogDTO getByBreedName(@RequestParam final String breedName) {
         return dogService.findByName(breedName)
                 .orElseThrow(
                         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog was not found by that breedName")
