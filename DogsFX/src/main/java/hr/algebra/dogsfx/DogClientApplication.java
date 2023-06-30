@@ -3,6 +3,7 @@ package hr.algebra.dogsfx;
 import hr.algebra.dogsfx.api.DogClient;
 import hr.algebra.dogsfx.helper.Alerts;
 import hr.algebra.dogsfx.helper.SerializationWhitelist;
+import hr.algebra.dogsfx.helper.WhitelistedObjectInputStream;
 import hr.algebra.dogsfx.model.DogBreed;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -234,7 +235,7 @@ public class DogClientApplication extends Application {
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
         if (selectedFile != null) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(selectedFile))) {
+            try (WhitelistedObjectInputStream ois = new WhitelistedObjectInputStream(new FileInputStream(selectedFile))) {
                 Object obj = ois.readObject();
 
                 if (obj instanceof List<?> importedList) {
@@ -244,18 +245,22 @@ public class DogClientApplication extends Application {
                         if (importedObj instanceof DogBreed importedBreed && SerializationWhitelist.isClassAllowed(importedObj.getClass())) {
                             importedBreeds.add(importedBreed);
                         } else {
-                            Alerts.showErrorAlert("Invalid File", "The selected file contains invalid dog breeds.");
+                            Alerts.showErrorAlert("Invalid File", "The selected file contains invalid classes.");
                             return; // Exit method if any invalid breed is found
                         }
                     }
 
-                    dogTable.getItems().addAll(importedBreeds);
-                    Alerts.showInfoAlert("Import Successful", "The dog breeds have been imported successfully.");
+                    if (!importedBreeds.isEmpty()){
+                        dogTable.getItems().addAll(importedBreeds);
+                        Alerts.showInfoAlert("Import Successful", "The dog breeds have been imported successfully.");
+                    }
+
                 } else {
                     Alerts.showErrorAlert("Invalid File", "The selected file does not contain valid dog breeds.");
                 }
             } catch (IOException | ClassNotFoundException e) {
                 Alerts.showErrorAlert("Import Failed", "An error occurred during import.");
+                System.out.printf(e.getMessage());
             }
         } else {
             Alerts.showWarningAlert("Error", "An error occurred while selecting the file.");
