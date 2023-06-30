@@ -8,6 +8,8 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 
+import java.util.Arrays;
+
 @EnableJms
 @Configuration
 public class ActiveMQConfig {
@@ -23,6 +25,16 @@ public class ActiveMQConfig {
         connectionFactory.setBrokerURL(BROKER_URL);
         connectionFactory.setPassword(BROKER_USERNAME);
         connectionFactory.setUserName(BROKER_PASSWORD);
+
+        // Whitelist trusted packages
+        String[] trustedPackages = {
+                "hr.algebra.dogsapi"
+                // Add more package names as needed
+        };
+        connectionFactory.setTrustedPackages(Arrays.stream(trustedPackages).toList());
+        // Ensure setTrustAllPackages is not set to true
+        connectionFactory.setTrustAllPackages(false);
+
         return connectionFactory;
     }
     @Bean

@@ -113,17 +113,11 @@ public class JdbcDogRepository implements DogRepository {
 
     @Override
     public void deleteByName(String dogName) {
-        String query = "DELETE FROM dog_breed";
-
-        if(Optional.ofNullable(dogName).isPresent()) {
-            query += " WHERE breed_name = " + dogName;
-        }
-
         if (!isSqlValid(dogName)) {
             throw new IllegalArgumentException("Invalid SQL statement: " + dogName);
         }
 
-        jdbcTemplate.update(query);
+        jdbcTemplate.update("DELETE FROM dog_breed WHERE breed_name = ?",dogName);
     }
 
     private DogBreed mapRowToDog(ResultSet rs, int rowNum) throws SQLException {
