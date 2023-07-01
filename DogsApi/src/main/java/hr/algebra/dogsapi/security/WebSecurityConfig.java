@@ -17,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -68,7 +67,7 @@ public class WebSecurityConfig {
                 .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/csrf/v1").permitAll()
-                .antMatchers("/dog/**").permitAll()
+//                .antMatchers("/dog/**").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()

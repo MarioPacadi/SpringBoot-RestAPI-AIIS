@@ -1,5 +1,6 @@
 package hr.algebra.dogsapi.repository;
 
+import hr.algebra.dogsapi.aspect.SqlInjProtection;
 import hr.algebra.dogsapi.models.DogBreed;
 import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DuplicateKeyException;
@@ -41,12 +42,9 @@ public class JdbcDogRepository implements DogRepository {
         return Set.copyOf(jdbcTemplate.query(SELECT_ALL, this::mapRowToDog));
     }
 
+    @SqlInjProtection
     @Override
     public Optional<DogBreed> findByName(String dogName) {
-        if (!isSqlValid(dogName)) {
-            throw new IllegalArgumentException("Invalid SQL statement: " + dogName);
-        }
-
         try {
             return Optional.ofNullable(
                     jdbcTemplate.queryForObject(SELECT_ALL + " WHERE breed_name = ?", this::mapRowToDog, dogName)
@@ -66,12 +64,9 @@ public class JdbcDogRepository implements DogRepository {
         }
     }
 
+    @SqlInjProtection
     @Override
     public Optional<DogBreed> update(String dogName, DogBreed updatedDog) {
-        if (!isSqlValid(dogName)) {
-            throw new IllegalArgumentException("Invalid SQL statement: " + dogName);
-        }
-
         int executed = jdbcTemplate.update("UPDATE dog_breed SET " +
                         "breed_name = ?, " +
                         "breed_type = ?, " +
@@ -111,12 +106,9 @@ public class JdbcDogRepository implements DogRepository {
     }
 
 
+    @SqlInjProtection
     @Override
     public void deleteByName(String dogName) {
-        if (!isSqlValid(dogName)) {
-            throw new IllegalArgumentException("Invalid SQL statement: " + dogName);
-        }
-
         jdbcTemplate.update("DELETE FROM dog_breed WHERE breed_name = ?",dogName);
     }
 
@@ -162,10 +154,5 @@ public class JdbcDogRepository implements DogRepository {
         values.put("img_creative_commons", dog.isImgCreativeCommons());
 
         return simpleJdbcInsert.executeAndReturnKey(values).longValue();
-    }
-
-    public boolean isSqlValid(String statement) {
-        String pattern = ".*\\b(DELETE|INSERT|UPDATE|DROP|ALTER)\\b.*";
-        return !Pattern.matches(pattern, statement);
     }
 }

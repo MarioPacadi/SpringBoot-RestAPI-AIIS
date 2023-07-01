@@ -8,30 +8,31 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 @EnableJms
 @Configuration
 public class ActiveMQConfig {
     //String BROKER_URL = "tcp://localhost:32774";
-    String BROKER_URL = "tcp://localhost:32768";
+    String brokerUrl = "tcp://localhost:32768";
     @Value("${spring.activemq.user}")
-    String BROKER_USERNAME;
+    String brokerUsername;
     @Value("${spring.activemq.password}")
-    String BROKER_PASSWORD;
+    String brokerPassword;
     @Bean
     public ActiveMQConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-        connectionFactory.setBrokerURL(BROKER_URL);
-        connectionFactory.setPassword(BROKER_USERNAME);
-        connectionFactory.setUserName(BROKER_PASSWORD);
+        connectionFactory.setBrokerURL(brokerUrl);
+        connectionFactory.setPassword(brokerUsername);
+        connectionFactory.setUserName(brokerPassword);
 
         // Whitelist trusted packages
-        String[] trustedPackages = {
-                "hr.algebra.dogsapi"
-                // Add more package names as needed
-        };
-        connectionFactory.setTrustedPackages(Arrays.stream(trustedPackages).toList());
+        List<String> trustedPackages=new ArrayList<>();
+        trustedPackages.add("hr.algebra.dogsapi");
+        trustedPackages.add("hr.algebra.dogsapi.controller");
+
+        connectionFactory.setTrustedPackages(trustedPackages);
         // Ensure setTrustAllPackages is not set to true
         connectionFactory.setTrustAllPackages(false);
 

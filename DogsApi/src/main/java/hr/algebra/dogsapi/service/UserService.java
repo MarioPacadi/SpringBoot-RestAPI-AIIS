@@ -11,8 +11,5 @@ public interface UserService {
     Account login(String email, String password);
     Account signIn(Account account);
     Optional<Account> getUser();
-
-//    boolean updateUser(LoginCommand loginCommand);
-
     List<Account> getAllUsers();
 }

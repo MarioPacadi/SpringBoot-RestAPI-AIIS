@@ -21,11 +21,6 @@ public class WhitelistedObjectInputStream extends ObjectInputStream {
         super(inputStream);
     }
 
-//    public WhitelistedObjectInputStream(InputStream inputStream, Set<Class<?>> whitelist) throws IOException {
-//        super(inputStream);
-//        WhitelistedObjectInputStream.whitelist = whitelist;
-//    }
-
     @Override
     protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
         Class<?> clazz = super.resolveClass(desc);
@@ -35,7 +30,7 @@ public class WhitelistedObjectInputStream extends ObjectInputStream {
         return clazz;
     }
 
-    private boolean isWhitelisted(Class<?> clazz) {
+    private static boolean isWhitelisted(Class<?> clazz) {
         return whitelist.contains(clazz);
     }
 }

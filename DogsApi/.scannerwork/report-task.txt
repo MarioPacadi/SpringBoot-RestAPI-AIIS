@@ -1,6 +1,6 @@
-projectKey=Test01
+projectKey=DogsApiV2
 serverUrl=http://localhost:9000
 serverVersion=9.9.0.65466
-dashboardUrl=http://localhost:9000/dashboard?id=Test01
-ceTaskId=AYcZ7vtnYXeN3J1xsaFW
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYcZ7vtnYXeN3J1xsaFW
+dashboardUrl=http://localhost:9000/dashboard?id=DogsApiV2
+ceTaskId=AYkQZGpuQUkmc9x7DdKn
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYkQZGpuQUkmc9x7DdKn

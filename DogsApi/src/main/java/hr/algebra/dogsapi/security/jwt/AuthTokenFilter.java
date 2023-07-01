@@ -25,15 +25,15 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtUtils;
 
-    private final UserRepository userDetailsService;
+    private final UserRepository userRepository;
 
     @Value("${dogsapi.app.jwtCookieName}")
     private String jwtCookie;
 
     @Autowired
-    public AuthTokenFilter(JwtUtils jwtUtils, UserRepository userDetailsService) {
+    public AuthTokenFilter(JwtUtils jwtUtils, UserRepository userRepository) {
         this.jwtUtils = jwtUtils;
-        this.userDetailsService = userDetailsService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-                UserDetails userDetails = userDetailsService.findByUsername(username)
+                UserDetails userDetails = userRepository.findByUsername(username)
                         .orElseThrow(() -> new IllegalArgumentException(String.format("There is no user with provided username %s", username)));
 
                 UsernamePasswordAuthenticationToken authentication =

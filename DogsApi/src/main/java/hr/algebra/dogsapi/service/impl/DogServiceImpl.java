@@ -24,7 +24,7 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public List<DogDTO> findAll() {
-        return dogRepository.findAll().stream().map(DogDTO::new).collect(Collectors.toList());
+        return dogRepository.findAll().stream().map(DogDTO::new).toList();
     }
 
     @Override

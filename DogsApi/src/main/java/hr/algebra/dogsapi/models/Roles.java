@@ -22,7 +22,7 @@ public enum Roles implements GrantedAuthority {
     }
 
     public static String get(int number) {
-        Optional<Roles> first = Arrays.stream(values()).filter((role) -> role.getId() == number).findFirst();
+        Optional<Roles> first = Arrays.stream(values()).filter(role -> role.getId() == number).findFirst();
         return first.isPresent() ? first.get().toString() : "";
     }
 

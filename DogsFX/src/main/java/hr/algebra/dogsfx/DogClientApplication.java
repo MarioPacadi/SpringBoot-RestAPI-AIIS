@@ -254,7 +254,9 @@ public class DogClientApplication extends Application {
                         dogTable.getItems().addAll(importedBreeds);
                         Alerts.showInfoAlert("Import Successful", "The dog breeds have been imported successfully.");
                     }
-
+                    else {
+                        Alerts.showWarningAlert("Warning", "The imported list of items is empty");
+                    }
                 } else {
                     Alerts.showErrorAlert("Invalid File", "The selected file does not contain valid dog breeds.");
                 }
@@ -263,7 +265,7 @@ public class DogClientApplication extends Application {
                 System.out.printf(e.getMessage());
             }
         } else {
-            Alerts.showWarningAlert("Error", "An error occurred while selecting the file.");
+            Alerts.showWarningAlert("Warning", "An error occurred while selecting the file.");
         }
     }
 
